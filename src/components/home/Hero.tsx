@@ -69,12 +69,12 @@ export default function Hero({ data: heroData }: HeroProps) {
                     muted
                     loop
                     playsInline
-                    className="object-cover w-full h-full scale-105 opacity-60"
+                    className="object-cover w-full h-full scale-105 opacity-90"
                     src={heroData.hero_section_background_video.url}
                 />
                 {/* Gradient Overlay for Readability */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/90" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
             </div>
 
             {/* Spotlight Effect (CSS representation) */}

@@ -2,6 +2,10 @@ import Hero from "@/components/home/Hero";
 import Tracking from "@/components/home/Tracking";
 import About from "@/components/home/About";
 import Services from "@/components/home/Services";
+import WhyChooseUs from "@/components/home/WhyChooseUs";
+import ShortSection from "@/components/home/ShortSection";
+import BottomBar from "@/components/home/BottomBar";
+import Footer from "@/components/home/Footer";
 import { getHomePageData } from "@/lib/api";
 
 export default async function Home() {
@@ -28,6 +32,37 @@ export default async function Home() {
         service_sub_topic: acf.service_sub_topic,
         service_description: acf.service_description,
         services: acf.services
+      }} />
+      <WhyChooseUs data={{
+        why_choose_us_video: acf.why_choose_us_video,
+        choose_us_main_title: acf.choose_us_main_title,
+        choose_us_sub_topic: acf.choose_us_sub_topic,
+        choose_us_description: acf.choose_us_description,
+        choose_us_points: acf.choose_us_points
+      }} />
+      <ShortSection data={{
+        short_section_title: acf.short_section_title,
+        short_section_sub_title: acf.short_section_sub_title,
+        short_section_description: acf.short_section_description,
+        short_section_image: acf.short_section_image,
+        get_started_now_button: acf.get_started_now_button,
+        get_started_now_button_link: acf.get_started_now_button_link,
+        feedback: acf.feedback,
+        happy_clients_: acf.happy_clients_
+      }} />
+      <BottomBar data={{
+        slide_bar_title: acf.slide_bar_title,
+        slide_bar_sub_title: acf.slide_bar_sub_title,
+        book_shipment_button_link: acf.book_shipment_button_link
+      }} />
+      <Footer data={{
+        footer_logo: acf.footer_logo,
+        footer_description: acf.footer_description,
+        explore_links: acf.explore_links,
+        support_links: acf.support_links,
+        social_media: acf.social_media,
+        contact_details_sri_lanka: acf.contact_details_sri_lanka,
+        contact_details_dubai: acf.contact_details_dubai
       }} />
     </div>
   );

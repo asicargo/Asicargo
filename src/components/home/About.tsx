@@ -9,9 +9,8 @@ if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
 }
 
-function Counter({ value }: { value: string }) {
+function Counter({ value, start }: { value: string; start: boolean }) {
     const ref = useRef<HTMLSpanElement>(null);
-    const inView = useInView(ref, { once: true, margin: "-100px" });
 
     const match = value.match(/^(\d+)(.*)$/);
     const num = match ? parseInt(match[1], 10) : 0;
@@ -24,12 +23,12 @@ function Counter({ value }: { value: string }) {
     });
 
     useEffect(() => {
-        if (inView && match) {
+        if (start && match) {
             setTimeout(() => {
                 motionValue.set(num);
             }, 300); // slight delay for better effect
         }
-    }, [inView, motionValue, num, match]);
+    }, [start, motionValue, num, match]);
 
     useEffect(() => {
         if (!match) return;
@@ -62,7 +61,7 @@ export default function About({ data: aboutData }: AboutProps) {
     const imageContainerRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
 
-    const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+    const isInView = useInView(sectionRef, { once: true, margin: "-10%" });
 
     // Parallax effect for the image using GSAP
     useEffect(() => {
@@ -142,7 +141,7 @@ export default function About({ data: aboutData }: AboutProps) {
                                 {aboutData.number_points.map((stat: any, index: number) => (
                                     <div key={index} className="flex flex-col">
                                         <div className="text-3xl sm:text-4xl font-bold text-[#0F172A] mb-1">
-                                            <Counter value={stat.analys_number} />
+                                            <Counter value={stat.analys_number} start={isInView} />
                                         </div>
                                         <div className="text-slate-500 text-sm font-medium">
                                             {stat.analys_name}
