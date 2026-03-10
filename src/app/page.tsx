@@ -50,20 +50,8 @@ export default async function Home() {
         feedback: acf.feedback,
         happy_clients_: acf.happy_clients_
       }} />
-      <BottomBar data={{
-        slide_bar_title: acf.slide_bar_title,
-        slide_bar_sub_title: acf.slide_bar_sub_title,
-        book_shipment_button_link: acf.book_shipment_button_link
-      }} />
-      <Footer data={{
-        footer_logo: acf.footer_logo,
-        footer_description: acf.footer_description,
-        explore_links: acf.explore_links,
-        support_links: acf.support_links,
-        social_media: acf.social_media,
-        contact_details_sri_lanka: acf.contact_details_sri_lanka,
-        contact_details_dubai: acf.contact_details_dubai
-      }} />
+      {/* BottomBar is now in layout.tsx */}
+      {/* Footer is now in layout.tsx */}
     </div>
   );
 }

@@ -4,7 +4,6 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView, Variants } from "framer-motion";
-import { ArrowUp } from "lucide-react";
 
 interface ExploreLink {
     acf_fc_layout: string;
@@ -57,9 +56,6 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
     const footerRef = useRef(null);
     const isInView = useInView(footerRef, { once: true, margin: "-10%" });
 
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
 
     const containerVariants: Variants = {
         hidden: { opacity: 0 },
@@ -158,7 +154,9 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
                                     ? '/'
                                     : link.page_name.toLowerCase() === 'services'
                                         ? '/services'
-                                        : (link.page_link || "#");
+                                        : link.page_name.toLowerCase() === 'blog'
+                                            ? '/blog'
+                                            : (link.page_link || "#");
 
                                 return (
                                     <li key={index}>
@@ -259,14 +257,7 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
                         ))}
                     </div>
 
-                    {/* Scroll to Top Button */}
-                    <button
-                        onClick={scrollToTop}
-                        className="absolute right-0 -top-4 -translate-y-1/2 w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors shadow-lg shadow-orange-500/30 group"
-                        aria-label="Scroll to top"
-                    >
-                        <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
-                    </button>
+
                 </motion.div>
             </div>
         </footer>

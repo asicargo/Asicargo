@@ -4,17 +4,13 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 
-interface ServiceHeroProps {
+interface BlogHeroProps {
   title: string;
   subtitle?: string;
   backgroundImageUrl?: string;
 }
 
-export default function ServiceHero({
-  title,
-  subtitle,
-  backgroundImageUrl,
-}: ServiceHeroProps) {
+export default function BlogHero({ title, subtitle, backgroundImageUrl }: BlogHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -27,7 +23,7 @@ export default function ServiceHero({
   return (
     <section
       ref={containerRef}
-      className="relative w-full pt-32 pb-20 md:pt-48 md:pb-32 flex items-center justify-center min-h-[50vh] overflow-hidden bg-zinc-900"
+      className="relative w-full pt-32 md:pt-48 flex items-center justify-center min-h-[50vh] overflow-hidden bg-zinc-900"
     >
       {/* Parallax Background */}
       <motion.div
@@ -37,7 +33,7 @@ export default function ServiceHero({
         {backgroundImageUrl ? (
           <Image
             src={backgroundImageUrl}
-            alt={title || "Services Background"}
+            alt={title || "Blog Background"}
             fill
             className="object-cover w-full h-full opacity-60"
             priority
@@ -59,7 +55,7 @@ export default function ServiceHero({
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="inline-block px-4 py-1.5 mb-6 rounded-full border border-orange-500/30 bg-orange-500/10 backdrop-blur-sm text-orange-400 text-sm font-semibold uppercase tracking-wider"
         >
-          Our Services
+          Our Blog
         </motion.div>
 
         <motion.h1
@@ -92,7 +88,7 @@ export default function ServiceHero({
       </div>
 
       {/* Bottom fading edge */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white dark:from-zinc-950 to-transparent z-20 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-zinc-50 to-transparent z-20 pointer-events-none" />
     </section>
   );
 }
