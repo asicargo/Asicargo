@@ -220,3 +220,30 @@ export async function getAboutPageData() {
 
     return data[0].acf;
 }
+
+export async function getContactPageData() {
+    const url = process.env.NEXT_PUBLIC_WORDPRESS_URL;
+    if (!url) {
+        throw new Error("NEXT_PUBLIC_WORDPRESS_URL is not defined in the environment variables.");
+    }
+
+    const res = await fetch(`${url}wp-json/wp/v2/pages?slug=contact-page`, {
+        next: { revalidate: 60 }
+    });
+
+    if (!res.ok) {
+        throw new Error(`Failed to fetch contact page data: ${res.status} ${res.statusText}`);
+    }
+
+    const data = await res.json();
+
+    if (!data || data.length === 0) {
+        return {
+            contact_title: "Contact Us",
+            contac_t_sub_title: "Your Shipments, Our Priority.",
+            hero_background: null,
+        };
+    }
+
+    return data[0].acf;
+}

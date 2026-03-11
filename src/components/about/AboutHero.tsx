@@ -28,7 +28,7 @@ export default function AboutHero({ data }: AboutHeroProps) {
   return (
     <section
       ref={containerRef}
-      className="relative w-full pt-32 pb-20 md:pt-48 md:pb-32 flex items-center justify-center min-h-[50vh] overflow-hidden bg-zinc-900"
+      className="relative w-full flex items-center justify-center h-[70vh] min-h-[580px] overflow-hidden bg-zinc-900"
     >
       {/* Parallax Background */}
       <motion.div

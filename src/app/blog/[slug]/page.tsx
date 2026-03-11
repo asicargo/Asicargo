@@ -170,7 +170,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {/* Rich content */}
             {content && (
               <div
-                className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-zinc-900 prose-p:text-zinc-600 prose-p:leading-relaxed prose-a:text-orange-500 prose-a:no-underline hover:prose-a:underline prose-strong:text-zinc-800 prose-img:rounded-2xl prose-img:shadow-lg prose-figure:my-8 prose-figcaption:text-center prose-figcaption:text-sm prose-figcaption:text-zinc-400"
+                className="blog-content prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-zinc-900 prose-p:text-zinc-600 prose-p:leading-relaxed prose-a:text-orange-500 prose-a:no-underline hover:prose-a:underline prose-strong:text-zinc-800"
                 dangerouslySetInnerHTML={{ __html: content }}
               />
             )}

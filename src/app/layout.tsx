@@ -59,6 +59,19 @@ export default async function RootLayout({
     });
   }
 
+  const hasContact = menu.some(
+    (item: any) =>
+      item.menu_name.toLowerCase() === "contact" ||
+      item.menu_name.toLowerCase() === "contact us"
+  );
+
+  if (!hasContact) {
+    menu.push({
+      menu_name: "Contact",
+      menu_url: "/contact",
+    });
+  }
+
   return (
     <html lang="en">
       <body

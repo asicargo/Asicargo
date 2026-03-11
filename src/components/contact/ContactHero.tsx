@@ -2,19 +2,19 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import Image from "next/image";
 
-interface ServiceHeroProps {
-  title: string;
-  subtitle?: string;
-  backgroundImageUrl?: string;
+interface ContactHeroProps {
+  data: {
+    contact_title?: string;
+    contac_t_sub_title?: string;
+    hero_background?: {
+      url: string;
+      mime_type?: string;
+    } | null;
+  };
 }
 
-export default function ServiceHero({
-  title,
-  subtitle,
-  backgroundImageUrl,
-}: ServiceHeroProps) {
+export default function ContactHero({ data }: ContactHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -23,6 +23,11 @@ export default function ServiceHero({
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  const isVideo =
+    data.hero_background?.mime_type?.startsWith("video") ||
+    data.hero_background?.url?.endsWith(".mp4") ||
+    data.hero_background?.url?.endsWith(".webm");
 
   return (
     <section
@@ -34,16 +39,24 @@ export default function ServiceHero({
         style={{ y, opacity }}
         className="absolute inset-0 w-full h-full z-0"
       >
-        {backgroundImageUrl ? (
-          <Image
-            src={backgroundImageUrl}
-            alt={title || "Services Background"}
-            fill
-            className="object-cover w-full h-full opacity-60"
-            priority
-          />
-        ) : (
-          <div className="w-full h-full bg-zinc-800 opacity-60" />
+        {data.hero_background?.url && (
+          isVideo ? (
+            <video
+              src={data.hero_background.url}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover opacity-60"
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={data.hero_background.url}
+              alt="Contact Background"
+              className="absolute inset-0 w-full h-full object-cover opacity-60"
+            />
+          )
         )}
         <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/80 via-zinc-900/50 to-zinc-900" />
       </motion.div>
@@ -59,7 +72,7 @@ export default function ServiceHero({
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="inline-block px-4 py-1.5 mb-6 rounded-full border border-orange-500/30 bg-orange-500/10 backdrop-blur-sm text-orange-400 text-sm font-semibold uppercase tracking-wider"
         >
-          Our Services
+          Get In Touch
         </motion.div>
 
         <motion.h1
@@ -68,19 +81,17 @@ export default function ServiceHero({
           transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
           className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-tight"
         >
-          {title}
+          {data.contact_title || "Contact Us"}
         </motion.h1>
 
-        {subtitle && (
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-lg md:text-xl text-zinc-300 font-medium max-w-2xl mx-auto leading-relaxed"
-          >
-            {subtitle}
-          </motion.p>
-        )}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="text-lg md:text-xl text-zinc-300 font-medium max-w-2xl mx-auto leading-relaxed"
+        >
+          {data.contac_t_sub_title || "Your Shipments, Our Priority."}
+        </motion.p>
 
         {/* Decorative line */}
         <motion.div

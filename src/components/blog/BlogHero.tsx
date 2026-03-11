@@ -23,7 +23,7 @@ export default function BlogHero({ title, subtitle, backgroundImageUrl }: BlogHe
   return (
     <section
       ref={containerRef}
-      className="relative w-full pt-32 md:pt-48 flex items-center justify-center min-h-[50vh] overflow-hidden bg-zinc-900"
+      className="relative w-full flex items-center justify-center h-[70vh] min-h-[580px] overflow-hidden bg-zinc-900"
     >
       {/* Parallax Background */}
       <motion.div

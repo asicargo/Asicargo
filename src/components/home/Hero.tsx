@@ -120,7 +120,7 @@ export default function Hero({ data: heroData }: HeroProps) {
 
                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                             <Link
-                                href={heroData.services_button_url}
+                                href={heroData.services_button_url || "/services"}
                                 className="px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold backdrop-blur-md border border-white/10 transition-colors"
                             >
                                 {heroData.services_button}

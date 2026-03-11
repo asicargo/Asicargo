@@ -124,3 +124,62 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ── Modern Blog Post Images ─────────────────────────────────────── */
+.blog-content figure {
+  margin: 2.5rem 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.07),
+    0 10px 30px -5px rgba(0, 0, 0, 0.12);
+  background: #f4f4f5;
+  position: relative;
+}
+
+.blog-content figure::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  pointer-events: none;
+}
+
+.blog-content figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.blog-content figure:hover img {
+  transform: scale(1.03);
+}
+
+/* Hide all image captions */
+.blog-content figcaption,
+.blog-content .wp-caption-text,
+.blog-content .wp-element-caption {
+  display: none !important;
+}
+
+/* Standalone (non-figure) images in content */
+.blog-content p > img,
+.blog-content > img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  margin: 2rem 0;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.07),
+    0 10px 30px -5px rgba(0, 0, 0, 0.12);
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.blog-content p > img:hover,
+.blog-content > img:hover {
+  transform: scale(1.02);
+}

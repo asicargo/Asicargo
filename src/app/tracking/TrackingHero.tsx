@@ -9,79 +9,82 @@ interface TrackingHeroProps {
 }
 
 export default function TrackingHero({ data }: TrackingHeroProps) {
-    const ref = useRef(null);
+    const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
-        target: ref,
+        target: containerRef,
         offset: ["start start", "end start"],
     });
 
-    // Parallax effects
-    const yHeroText = useTransform(scrollYProgress, [0, 1], [0, 200]);
-    const opacityHero = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-    const scaleImage = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+    const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+    const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
     return (
-        <section ref={ref} className="relative w-full h-[60vh] md:h-[70vh] min-h-[500px] flex flex-col justify-center items-center overflow-hidden bg-[#0A1629]">
-
-            {/* Background Image with Parallax */}
+        <section
+            ref={containerRef}
+            className="relative w-full flex items-center justify-center h-[70vh] min-h-[580px] overflow-hidden bg-zinc-900"
+        >
+            {/* Parallax Background */}
             <motion.div
-                style={{ scale: scaleImage }}
-                className="absolute inset-0 z-0 w-full h-full"
+                style={{ y, opacity }}
+                className="absolute inset-0 w-full h-full z-0"
             >
                 {data.tracking_hero_background?.url && (
                     <Image
                         src={data.tracking_hero_background.url}
                         alt={data.tracking_hero_background.alt || "Tracking background"}
                         fill
-                        className="object-cover object-center"
+                        className="object-cover w-full h-full opacity-60"
                         priority
                     />
                 )}
+                <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/80 via-zinc-900/50 to-zinc-900" />
             </motion.div>
 
-            {/* Gradient Overlays for Readability and Aesthetic */}
-            <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#0A1629]/80 via-[#0A1629]/50 to-[#0A1629] pointer-events-none"></div>
+            {/* Spotlight Effect */}
+            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-orange-500/20 blur-[100px] rounded-full pointer-events-none z-0 mix-blend-screen" />
 
-            <motion.div
-                style={{ y: yHeroText, opacity: opacityHero }}
-                className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20"
-            >
-                {/* Decorative Pill */}
+            {/* Content */}
+            <div className="relative z-10 container mx-auto px-6 text-center">
                 <motion.div
-                    initial={{ opacity: 0, y: -20 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="inline-block px-4 py-1.5 mb-6 rounded-full border border-orange-500/30 bg-orange-500/10 backdrop-blur-sm text-orange-400 text-sm font-semibold uppercase tracking-wider shadow-[0_0_15px_rgba(249,115,22,0.15)]"
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="inline-block px-4 py-1.5 mb-6 rounded-full border border-orange-500/30 bg-orange-500/10 backdrop-blur-sm text-orange-400 text-sm font-semibold uppercase tracking-wider"
                 >
                     Live Cargo Tracking
                 </motion.div>
 
-                {/* Main Heading */}
-                <motion.div
+                <motion.h1
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                    className="overflow-hidden"
+                    transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+                    className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-tight"
                 >
-                    <h1 className="text-4xl md:text-6xl lg:text-[72px] font-bold text-white mb-6 tracking-tight leading-[1.1]">
-                        {data.tracking_page}
-                    </h1>
-                </motion.div>
+                    {data.tracking_page}
+                </motion.h1>
 
-                {/* Subtitle */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-                >
-                    <p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed font-medium">
+                {data.tracking_sub_title && (
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                        className="text-lg md:text-xl text-zinc-300 font-medium max-w-2xl mx-auto leading-relaxed"
+                    >
                         {data.tracking_sub_title}
-                    </p>
-                </motion.div>
-            </motion.div>
+                    </motion.p>
+                )}
 
-            {/* Bottom fading edge to blend into the next section */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white dark:from-zinc-950 to-transparent z-20 pointer-events-none"></div>
+                {/* Decorative line */}
+                <motion.div
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 1, delay: 0.4, ease: "easeInOut" }}
+                    className="h-1 w-24 bg-gradient-to-r from-orange-600 to-orange-400 mx-auto mt-10 rounded-full"
+                />
+            </div>
+
+            {/* Bottom fading edge */}
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white dark:from-zinc-950 to-transparent z-20 pointer-events-none" />
         </section>
     );
 }

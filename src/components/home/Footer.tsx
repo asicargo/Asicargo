@@ -156,7 +156,10 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
                                         ? '/services'
                                         : link.page_name.toLowerCase() === 'blog'
                                             ? '/blog'
-                                            : (link.page_link || "#");
+                                            : link.page_name.toLowerCase() === 'contact' ||
+                                              link.page_name.toLowerCase() === 'contact us'
+                                                ? '/contact'
+                                                : (link.page_link || "#");
 
                                 return (
                                     <li key={index}>
