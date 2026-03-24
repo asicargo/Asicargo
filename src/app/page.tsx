@@ -3,6 +3,7 @@ import Tracking from "@/components/home/Tracking";
 import About from "@/components/home/About";
 import Services from "@/components/home/Services";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
+import HowItWorks from "@/components/home/HowItWorks";
 import ShortSection from "@/components/home/ShortSection";
 import BottomBar from "@/components/home/BottomBar";
 import Footer from "@/components/home/Footer";
@@ -39,6 +40,11 @@ export default async function Home() {
         choose_us_sub_topic: acf.choose_us_sub_topic,
         choose_us_description: acf.choose_us_description,
         choose_us_points: acf.choose_us_points
+      }} />
+      <HowItWorks data={{
+        main_title_how_it_works: acf.main_title_how_it_works,
+        heading_of_how_it_works: acf.heading_of_how_it_works,
+        how_it_works_steps: acf.how_it_works_steps
       }} />
       <ShortSection data={{
         short_section_title: acf.short_section_title,
