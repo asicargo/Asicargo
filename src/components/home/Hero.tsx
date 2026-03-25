@@ -60,7 +60,7 @@ export default function Hero({ data: heroData }: HeroProps) {
     return (
         <section
             ref={containerRef}
-            className="relative w-full h-screen min-h-[800px] flex items-center pt-32 md:pt-20 overflow-hidden bg-black"
+            className="relative w-full min-h-[100dvh] md:min-h-[800px] flex items-center pt-28 md:pt-32 overflow-hidden bg-black"
         >
             {/* Background Video */}
             <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
@@ -81,7 +81,7 @@ export default function Hero({ data: heroData }: HeroProps) {
             <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none z-0 mix-blend-screen" />
 
             {/* Main Content */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto px-6 flex flex-col justify-center h-full pb-48 md:pb-32 mt-10 md:mt-0">
+            <div className="relative z-10 w-full max-w-7xl mx-auto px-6 flex flex-col justify-center pb-56 sm:pb-48 md:pb-32 pt-0 mt-0">
                 <div className="max-w-3xl">
                     {/* Tag */}
                     <div className="inline-block px-4 py-1.5 mb-6 rounded-md border border-orange-500/30 bg-orange-500/10 backdrop-blur-sm text-orange-400 text-sm font-semibold uppercase tracking-wider">
@@ -91,7 +91,7 @@ export default function Hero({ data: heroData }: HeroProps) {
                     {/* Title */}
                     <h1
                         ref={titleRef}
-                        className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]"
+                        className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]"
                         dangerouslySetInnerHTML={{
                             __html: heroData.hero_main_title
                                 .replace("Stress Free Door to Door Cargo", 'Stress Free <span class="text-orange-500 block">Door to Door Cargo</span>')
@@ -121,7 +121,7 @@ export default function Hero({ data: heroData }: HeroProps) {
                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                             <Link
                                 href={heroData.services_button_url || "/services"}
-                                className="px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold backdrop-blur-md border border-white/10 transition-colors"
+                                className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold backdrop-blur-md border border-white/10 transition-colors text-center"
                             >
                                 {heroData.services_button}
                             </Link>
@@ -144,8 +144,8 @@ export default function Hero({ data: heroData }: HeroProps) {
                                     index === 0
                                         ? ""
                                         : index === 2
-                                        ? "md:pl-8 md:border-l md:border-white/10"
-                                        : "pl-6 md:pl-8 border-l border-white/10"
+                                            ? "md:pl-8 md:border-l md:border-white/10"
+                                            : "pl-6 md:pl-8 border-l border-white/10"
                                 }
                                 dangerouslySetInnerHTML={{
                                     __html: word
