@@ -81,7 +81,7 @@ function BlogCard({ post, index }: { post: BlogPost; index: number }) {
             className="group relative flex flex-col bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-zinc-100"
         >
             {/* Image */}
-            <Link href={`/blog/${post.slug}`} className="block relative h-56 w-full overflow-hidden flex-shrink-0">
+            <Link href={`/blog/${post.slug}`} className="block relative h-56 w-full overflow-hidden shrink-0">
                 {imageUrl ? (
                     <Image
                         src={imageUrl}
@@ -91,12 +91,12 @@ function BlogCard({ post, index }: { post: BlogPost; index: number }) {
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                 ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-zinc-200 to-zinc-300 flex items-center justify-center">
+                    <div className="w-full h-full bg-linear-to-br from-zinc-200 to-zinc-300 flex items-center justify-center">
                         <span className="text-zinc-400 text-sm">No Image</span>
                     </div>
                 )}
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* Date Badge */}
                 {dateInfo && (
@@ -129,7 +129,7 @@ function BlogCard({ post, index }: { post: BlogPost; index: number }) {
             </div>
 
             {/* Bottom accent line */}
-            <div className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-orange-500 to-orange-400 w-0 group-hover:w-full transition-all duration-500 rounded-b-2xl" />
+            <div className="absolute bottom-0 left-0 h-0.5 bg-linear-to-r from-orange-500 to-orange-400 w-0 group-hover:w-full transition-all duration-500 rounded-b-2xl" />
         </motion.article>
     );
 }

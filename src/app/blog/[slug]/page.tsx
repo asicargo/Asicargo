@@ -12,7 +12,7 @@ export const dynamicParams = true;
 
 export async function generateStaticParams() {
   try {
-    const posts = await getBlogPosts() as Array<{ slug: string }>;
+    const posts = (await getBlogPosts()) as Array<{ slug: string }>;
     return posts.map((post) => ({ slug: post.slug }));
   } catch {
     return [];
@@ -49,11 +49,14 @@ function formatDate(dateStr: string): string {
   if (!dateStr) return "";
   const parts = dateStr.split("/");
   if (parts.length === 3) {
-    return new Date(`${parts[1]}/${parts[0]}/${parts[2]}`).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    return new Date(`${parts[1]}/${parts[0]}/${parts[2]}`).toLocaleDateString(
+      "en-US",
+      {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      },
+    );
   }
   return new Date(dateStr).toLocaleDateString("en-US", {
     year: "numeric",
@@ -64,7 +67,7 @@ function formatDate(dateStr: string): string {
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = await getBlogPost(slug) as BlogPost | null;
+  const post = (await getBlogPost(slug)) as BlogPost | null;
   if (!post) return { title: "Post Not Found" };
   const title = post.acf.blog_title || post.title.rendered;
   return {
@@ -110,7 +113,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 container mx-auto px-6 max-w-7xl pb-10">
             <Link
               href="/blog"
@@ -119,7 +122,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <ArrowLeft className="w-4 h-4" />
               Back to Blog
             </Link>
-            <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight max-w-3xl"
+            <h1
+              className="text-3xl md:text-5xl font-bold text-white leading-tight max-w-3xl"
               dangerouslySetInnerHTML={{ __html: title }}
             />
           </div>
@@ -155,7 +159,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {/* Title (for non-hero case) */}
             {!heroImageUrl && (
-              <h1 className="text-3xl md:text-5xl font-bold text-zinc-900 mb-6 leading-tight"
+              <h1
+                className="text-3xl md:text-5xl font-bold text-zinc-900 mb-6 leading-tight"
                 dangerouslySetInnerHTML={{ __html: title }}
               />
             )}
@@ -188,7 +193,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </article>
 
           {/* ── Sidebar ── */}
-          <aside className="lg:w-80 xl:w-96 flex-shrink-0">
+          <aside className="lg:w-80 xl:w-96 shrink-0">
             <BlogSidebar posts={otherPosts} />
           </aside>
         </div>

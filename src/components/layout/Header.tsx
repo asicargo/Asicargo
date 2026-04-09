@@ -11,6 +11,7 @@ interface HeaderProps {
     url: string;
     alt?: string;
   };
+  bookShipmentLink?: string;
   menu: Array<{
     menu_name: string;
     menu_url: string;
@@ -28,13 +29,22 @@ function resolveHref(item: { menu_name: string; menu_url: string }): string {
   return item.menu_url || "#";
 }
 
-export default function Header({ header_logo, menu }: HeaderProps) {
+export default function Header({
+  header_logo,
+  bookShipmentLink,
+  menu,
+}: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeIndicator, setActiveIndicator] = useState({ left: 0, width: 0 });
   const navRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const ctaHref =
+    (typeof bookShipmentLink === "string" ? bookShipmentLink : "").trim() ||
+    "/book";
+  const isCtaExternal =
+    /^https?:\/\//i.test(ctaHref) || ctaHref.startsWith("//");
 
   /* ─── Scroll behaviour ─── */
   useEffect(() => {
@@ -58,7 +68,9 @@ export default function Header({ header_logo, menu }: HeaderProps) {
   /* ─── Active nav indicator ─── */
   useEffect(() => {
     if (!navRef.current) return;
-    const activeLink = navRef.current.querySelector<HTMLAnchorElement>("[data-active='true']");
+    const activeLink = navRef.current.querySelector<HTMLAnchorElement>(
+      "[data-active='true']",
+    );
     if (activeLink) {
       const navRect = navRef.current.getBoundingClientRect();
       const linkRect = activeLink.getBoundingClientRect();
@@ -208,6 +220,7 @@ export default function Header({ header_logo, menu }: HeaderProps) {
           background-size: 200% 100%;
           animation: hdr-shimmer 2.8s linear infinite;
           border-radius: inherit;
+          pointer-events: none;
         }
         .hdr-cta:hover {
           transform: translateY(-1px) scale(1.02);
@@ -310,7 +323,11 @@ export default function Header({ header_logo, menu }: HeaderProps) {
 
         <div className="hdr-inner">
           {/* ── Logo ── */}
-          <Link href="/" className="hdr-logo" onClick={() => setIsMobileMenuOpen(false)}>
+          <Link
+            href="/"
+            className="hdr-logo"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
             <Image
               src={header_logo.url}
               alt={header_logo.alt || "Asicargo"}
@@ -327,7 +344,10 @@ export default function Header({ header_logo, menu }: HeaderProps) {
             {activeIndicator.width > 0 && (
               <span
                 className="hdr-pill"
-                style={{ left: activeIndicator.left, width: activeIndicator.width }}
+                style={{
+                  left: activeIndicator.left,
+                  width: activeIndicator.width,
+                }}
               />
             )}
             {menu.map((item, i) => {
@@ -347,10 +367,22 @@ export default function Header({ header_logo, menu }: HeaderProps) {
           </div>
 
           {/* ── CTA Button ── */}
-          <Link href="/book" className="hdr-cta">
-            <Package size={14} strokeWidth={2.5} />
-            Book Shipment
-          </Link>
+          {isCtaExternal ? (
+            <a
+              href={ctaHref}
+              className="hdr-cta"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Package size={14} strokeWidth={2.5} />
+              Book Shipment
+            </a>
+          ) : (
+            <Link href={ctaHref} className="hdr-cta">
+              <Package size={14} strokeWidth={2.5} />
+              Book Shipment
+            </Link>
+          )}
 
           {/* ── Mobile Hamburger ── */}
           <button
@@ -380,14 +412,27 @@ export default function Header({ header_logo, menu }: HeaderProps) {
                 </Link>
               );
             })}
-            <Link
-              href="/book"
-              className="hdr-mob-cta"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <Package size={16} />
-              Book Shipment
-            </Link>
+            {isCtaExternal ? (
+              <a
+                href={ctaHref}
+                className="hdr-mob-cta"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <Package size={16} />
+                Book Shipment
+              </a>
+            ) : (
+              <Link
+                href={ctaHref}
+                className="hdr-mob-cta"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <Package size={16} />
+                Book Shipment
+              </Link>
+            )}
           </div>
         </div>
       </header>

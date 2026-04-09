@@ -78,7 +78,11 @@ export default async function RootLayout({
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header header_logo={acf.header_logo} menu={menu} />
+        <Header
+          header_logo={acf.header_logo}
+          bookShipmentLink={acf.book_shipment_button_link}
+          menu={menu}
+        />
         <main className="min-h-screen flex flex-col">{children}</main>
         <BottomBar data={acf} />
         <Footer data={acf} />

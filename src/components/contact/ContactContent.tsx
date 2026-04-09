@@ -87,7 +87,7 @@ function OfficeCard({
           const href = getDetailHref(d);
           const row = (
             <div className="flex items-start gap-3">
-              <div className="mt-0.5 w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center text-orange-500 flex-shrink-0">
+              <div className="mt-0.5 w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center text-orange-500 shrink-0">
                 <ContactIcon name={label} />
               </div>
               <div>

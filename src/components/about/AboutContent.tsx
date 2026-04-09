@@ -49,7 +49,7 @@ export default function AboutContent({ data }: AboutContentProps) {
               className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-zinc-800"
             >
               {mainImage && (
-                <div className="relative aspect-[4/3] w-full">
+                <div className="relative aspect-4/3 w-full">
                   <Image
                     src={mainImage.url}
                     alt={mainImage.alt || "About Asicargo"}
@@ -124,7 +124,7 @@ export default function AboutContent({ data }: AboutContentProps) {
                       transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                       className="flex items-center gap-3 group"
                     >
-                      <div className="flex-shrink-0">
+                      <div className="shrink-0">
                         {point.icon_about_point?.url ? (
                           <img
                             src={point.icon_about_point.url}

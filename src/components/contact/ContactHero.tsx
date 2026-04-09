@@ -32,7 +32,7 @@ export default function ContactHero({ data }: ContactHeroProps) {
   return (
     <section
       ref={containerRef}
-      className="relative w-full flex items-center justify-center h-[70vh] min-h-[580px] overflow-hidden bg-zinc-900"
+      className="relative w-full flex items-center justify-center h-[70vh] min-h-145 overflow-hidden bg-zinc-900"
     >
       {/* Parallax Background */}
       <motion.div
@@ -58,11 +58,11 @@ export default function ContactHero({ data }: ContactHeroProps) {
             />
           )
         )}
-        <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/80 via-zinc-900/50 to-zinc-900" />
+        <div className="absolute inset-0 bg-linear-to-b from-zinc-900/80 via-zinc-900/50 to-zinc-900" />
       </motion.div>
 
       {/* Spotlight Effect */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-orange-500/20 blur-[100px] rounded-full pointer-events-none z-0 mix-blend-screen" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-150 h-75 bg-orange-500/20 blur-[100px] rounded-full pointer-events-none z-0 mix-blend-screen" />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 text-center">
@@ -98,12 +98,12 @@ export default function ContactHero({ data }: ContactHeroProps) {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1, delay: 0.4, ease: "easeInOut" }}
-          className="h-1 w-24 bg-gradient-to-r from-orange-600 to-orange-400 mx-auto mt-10 rounded-full"
+          className="h-1 w-24 bg-linear-to-r from-orange-600 to-orange-400 mx-auto mt-10 rounded-full"
         />
       </div>
 
       {/* Bottom fading edge */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white dark:from-zinc-950 to-transparent z-20 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-white dark:from-zinc-950 to-transparent z-20 pointer-events-none" />
     </section>
   );
 }
