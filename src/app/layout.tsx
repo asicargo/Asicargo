@@ -16,6 +16,26 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Asicargo | Stress Free Door to Door Cargo",
   description: "Direct routes weekly, secure cargo, door delivery, best rates.",
+  icons: {
+    icon: [
+      {
+        url: "/favicon.png",
+        type: "image/png",
+      },
+    ],
+    shortcut: [
+      {
+        url: "/favicon.png",
+        type: "image/png",
+      },
+    ],
+    apple: [
+      {
+        url: "/favicon.png",
+        type: "image/png",
+      },
+    ],
+  },
 };
 
 import { getHomePageData } from "@/lib/api";
@@ -36,7 +56,7 @@ export default async function RootLayout({
   const hasAbout = menu.some(
     (item: any) =>
       item.menu_name.toLowerCase() === "about" ||
-      item.menu_name.toLowerCase() === "about us"
+      item.menu_name.toLowerCase() === "about us",
   );
 
   if (!hasAbout) {
@@ -49,7 +69,7 @@ export default async function RootLayout({
   const hasBlog = menu.some(
     (item: any) =>
       item.menu_name.toLowerCase() === "blog" ||
-      item.menu_name.toLowerCase() === "blogs"
+      item.menu_name.toLowerCase() === "blogs",
   );
 
   if (!hasBlog) {
@@ -62,7 +82,7 @@ export default async function RootLayout({
   const hasContact = menu.some(
     (item: any) =>
       item.menu_name.toLowerCase() === "contact" ||
-      item.menu_name.toLowerCase() === "contact us"
+      item.menu_name.toLowerCase() === "contact us",
   );
 
   if (!hasContact) {
