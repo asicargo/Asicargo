@@ -39,8 +39,8 @@ export default function ContactHero({ data }: ContactHeroProps) {
         style={{ y, opacity }}
         className="absolute inset-0 w-full h-full z-0"
       >
-        {data.hero_background?.url && (
-          isVideo ? (
+        {data.hero_background?.url &&
+          (isVideo ? (
             <video
               src={data.hero_background.url}
               autoPlay
@@ -56,8 +56,7 @@ export default function ContactHero({ data }: ContactHeroProps) {
               alt="Contact Background"
               className="absolute inset-0 w-full h-full object-cover opacity-60"
             />
-          )
-        )}
+          ))}
         <div className="absolute inset-0 bg-linear-to-b from-zinc-900/80 via-zinc-900/50 to-zinc-900" />
       </motion.div>
 

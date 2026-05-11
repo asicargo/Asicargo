@@ -86,7 +86,7 @@ export default function About({ data: aboutData }: AboutProps) {
             end: "bottom top",
             scrub: true,
           },
-        }
+        },
       );
     }, imageContainerRef);
 

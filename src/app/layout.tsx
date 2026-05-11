@@ -43,6 +43,7 @@ import { getHomePageData } from "@/lib/api";
 import Footer from "@/components/home/Footer";
 import BottomBar from "@/components/home/BottomBar";
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 
 export default async function RootLayout({
   children,
@@ -106,6 +107,7 @@ export default async function RootLayout({
         <main className="min-h-screen flex flex-col">{children}</main>
         <BottomBar data={acf} />
         <Footer data={acf} />
+        <FloatingWhatsApp link={acf.book_shipment_button_link} />
         <ScrollToTop />
       </body>
     </html>
